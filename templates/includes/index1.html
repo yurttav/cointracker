@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block  body%}
+    <!--
+    <div style = "margin-top : 100px;" class="jumbotron text-center">
+        <h3>BINANCE</h3>
+    </div>
+    -->
+    <a style = "float : right;" href="/" class="btn btn-danger">Yenile</a>
+
+    {% if binanceallcoins  %}
+        <pre><code class="multiline language-js">$(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+        </code></pre>
+
+        <table id='myTable' class="display"><!--table table-sm-->
+            <thead>
+              <tr>
+                <th scope="col">COIN</th>
+                <th scope="col">SON</th>
+                <th scope="col">MAKS</th>
+                <th scope="col">MIN</th>
+                <th scope="col">HACİM</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for coin in binanceallcoins %}
+                    <!--{% if "BTC" in coin.symbol %}                     {% endif%}-->
+                    <tr>
+                        <th scope="row">{{coin.symbol}}</th>
+                        <td>{{coin.lastPrice}}</td>
+                        <td>{{coin.highPrice}}</td>
+                        <td>{{coin.lowPrice}}</td>
+                        <td>{{coin.quoteVolume}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    {% else %}
+    <div class = "alert alert-danger">API çalışmadı</div>
+{% endif %}
+
+{% endblock  %}

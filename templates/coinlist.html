@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block body%}
+
+    <div class="bd-example" style = "float: right;">
+        <a href="/deleteallcoin" class="btn btn-danger">Sıfırla</a>
+        <a href="/" class="btn btn-danger">Tamam</a>
+    </div>
+  
+        {% if binanceallcoins  %}
+        <!--Arama-->
+        <div class="col-lg-8">
+                <!--Arama işlemini klasik form ve get kullanarak değişik bir şekilde yaptık, action ve method = post parametrelerini sildik-->  
+                <form>      
+                    {% csrf_token %}
+                    <input type="text" name= "keyword" class="input-sm" maxlength="64" placeholder="Ara">
+                    <button type="submit" class="btn btn-danger">Filtrele</button>              
+                </form>
+                <hr>
+        </div>
+	
+			<table class="sortable table table-sm"><!--table table-sm-->
+				<thead>
+				  <tr>
+					<th scope="col">COIN</th>
+					<th scope="col">TAKİP DURUMU</th>
+					<th scope="col">DURUM DEĞİŞTİR</th>
+				  </tr>
+				</thead>
+				<tbody>
+					{% for coin in binanceallcoins %}
+						<!--{% if "BTC" in coin.symbol %}                     {% endif%}-->
+						<tr>
+							<th scope="row">{{coin.coinsymbol}}</th>
+                            <td>
+                                {% if coin.trackstate %}
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" name="{{coin.coinsymbol}}" checked>
+                                        </div>                                    
+                                    </div>
+                                {% else %}
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" name="{{coin.coinsymbol}}" unchecked>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                            </td>
+                            <td><a href="{% url 'update' coin.coinsymbol %}" class ="btn btn-danger">Takip Değiştir</a></td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			  </table>
+		{% else %}
+		<div class = "alert alert-danger">API çalışmadı</div>
+    {% endif %}
+{%endblock%}
