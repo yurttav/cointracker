@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block body%}
+
+<form>
+	{% csrf_token %}
+
+<div class="form-row align-items-center">
+
+<div class="input-group">
+
+        <div class="input-group-prepend">
+                <span class="input-group-text" id=""> <font size="-2">Aranan Metin</font></span>
+        </div>
+                {%if tweet_querry%}
+                <input type="text" class="form-control" name="tweet_querry" value = {{tweet_querry}}>
+                {%else%}
+                <input type="text" class="form-control" name="tweet_querry" >
+                {%endif%}
+		
+  <div class="input-group-append">
+		<button type="submit" class="btn btn-primary">Tweet Ara</button>
+  </div>
+</div>
+</div>
+</form>
+
+<p></p>
+
+{% if searched_result %}
+
+    {% for tweet in searched_result %}	
+    <ul class="list-group">
+        <li class="list-group-item py-1">{{tweet}}</li>	
+    </ul>
+    {% endfor %}
+
+{% else %}
+	<div class = "alert alert-danger">API çalışmadı</div>
+{% endif %}
+
+{%endblock%}
+

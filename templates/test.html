@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block body%}
+<div class="row justify-content-between">
+        <div class="col-3">
+                <form>
+                        {% csrf_token %}
+                <div class="input-group">
+                        <div class="input-group-prepend">
+                <span class="input-group-text" id=""><font size="-2">Veri Aralığı</font></span>
+                <select class="custom-select" id="inputGroupSelect04" name="timeinterval">
+                        {% if interval %}
+                        <option selected>{{interval}}</option>
+                        {%else%}
+                        <option selected>1h</option>
+                        {%endif%}
+                        <option value="1m">1m</option>
+                        <option value="3m">3m</option>
+                        <option value="5m">5m</option>
+                        <option value="15m">15m</option>
+                        <option value="30m">30m</option>
+                        <option value="1h">1h</option>
+                        <option value="2h">2h</option>
+                        <option value="4h">4h</option>
+                        <option value="6h">6h</option>
+                        <option value="8h">12h</option>
+                        <option value="1d">1d</option>
+                        <option value="3d">3d</option>
+                        <option value="1w">1w</option>
+                        <option value="1M">1M</option>
+                </select>
+                </div>
+                        <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary">MA Tablosu Göster</button>
+                        </div>
+                </div>
+        </div>
+
+        <div class="col-8">
+                <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">Hepsi</label>
+                </div>
+                <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">ma25&lt;Fiyat&lt;ma99</label>
+                </div>
+                <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <label class="form-check-label" for="inlineRadio3">Fiyat>wma50 %2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
+                        <label class="form-check-label" for="inlineRadio4">Fiyat&lt;wma50 %2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option5">
+                        <label class="form-check-label" for="inlineRadio5">Yeniden Veri Topla</label>
+                </div>			
+        </div>
+</div>
+</form>
+
+<p></p>
+
+
+    
+
+{%endblock%}
+
+
+
+		
