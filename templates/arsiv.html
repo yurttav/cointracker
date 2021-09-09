@@ -13,7 +13,7 @@
 		{% if selected_coin %}
 		<option selected>{{selected_coin}}</option>
 		{%else%}
-		<option selected>Seç...</option>
+		<option selected>Choose...</option>
 		{%endif%}
 		{% if binance_all_symbols %}
 			{% for symbol in binance_all_symbols %}
@@ -23,7 +23,7 @@
 	</select>
 	</div>
 	<div class="input-group-prepend">
-    <span class="input-group-text" id=""> <font size="-2">Veri Adedi</font></span>
+    <span class="input-group-text" id=""> <font size="-2">Count</font></span>
 	</div>
 	{%if limit%}
 	<input type="text" class="form-control" name="data_count" value = {{limit}}>
@@ -31,7 +31,7 @@
 	<input type="text" class="form-control" name="data_count" >
 	{%endif%}
 	<div class="input-group-prepend">
-			<span class="input-group-text" id=""><font size="-2">Veri Aralığı</font></span>
+			<span class="input-group-text" id=""><font size="-2">Interval</font></span>
 			<select class="custom-select" id="inputGroupSelect04" name="timeinterval">
 			{% if interval %}
 			<option selected>{{interval}}</option>
@@ -52,16 +52,16 @@
 			<option value="3d">3d</option>
 			<option value="1w">1w</option>
 			<option value="1M">1M</option>
-	
+
 	</select>
 	</div>
 	<div class="input-group-prepend">
-			<span class="input-group-text" id=""><font size="-2">Takvim Aralığı Kullan</font></span>
+			<span class="input-group-text" id=""><font size="-2">Use Calendar</font></span>
 			<div class="input-group-text">
 					<input type="checkbox" name="checkboxstate" unchecked>
 			</div>
 	</div>
-	
+
 	<input id="datepicker1" width="276" name="datetimepicker1" value="{{start_time}}">
 	<script>
 			$('#datepicker1').datetimepicker({
@@ -79,9 +79,9 @@
 				format: 'dd.mm.yyyy HH:MM'
 			});
 	</script>
-	
+
   <div class="input-group-append">
-		<button type="submit" class="btn btn-primary">Tamam</button>
+		<button type="submit" class="btn btn-primary">OK</button>
   </div>
 </div>
 </div>
@@ -93,19 +93,19 @@
 
 <div class="row">
 	<div class="col-7" style="overflow-y:auto;">
-			<table id="example" class="table table-striped table-sm table-bordered" style="width:100%">	
+			<table id="arsivtable1" class="table table-striped table-sm table-bordered" style="width:100%">
 			<!--<table class="sortable scrollTable table table-sm table-bordered">table table-sm-->
 				<thead>
 				  <tr>
-					<th scope="col">Kapanış Zamanı</th>
-					<th scope="col">Maks</th>
+					<th scope="col">Close Time</th>
+					<th scope="col">Max</th>
 					<th scope="col">Min</th>
-					<th scope="col">Kapanış Fiyatı</th>
-					<th scope="col">%Maks-Min</th>
-					<th scope="col">Hacim</th>
-					<th scope="col">Alış Hacmi</th>
-					<th scope="col">Satış Hacmi</th>
-					<th scope="col">%Alış</th>
+					<th scope="col">Close Price</th>
+					<th scope="col">Max-Min %</th>
+					<th scope="col">Volume</th>
+					<th scope="col">Buy Volume</th>
+					<th scope="col">Sell Volume</th>
+					<th scope="col">Buy Vol %</th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -141,20 +141,20 @@
 					{% endfor %}
 				</tbody>
 				</table>
-				
+
 
 			</div>
 			<div class="col-3">
 				  <font size="+1">
-					<strong><center>Dikkat Çeken Hacim Hareketleri</center>  </strong>
+					<strong><center>Volume Spikes</center>  </strong>
 					</font>
 					<table class="sortable table table-sm"><!--table table-sm-->
 						<thead>
 							<tr>
-							<th scope="col">Zaman</th>
-							<th scope="col">Top.Hacim</th>
-							<th scope="col">Al Hacmi</th>
-							<th scope="col">Fiyat</th>
+							<th scope="col">Time</th>
+							<th scope="col">Tot.Vol</th>
+							<th scope="col">Buy Vol</th>
+							<th scope="col">Price</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -176,21 +176,21 @@
 					<ul class="list-group">
 							<font size="-1">
 							<strong>
-							<li class="list-group-item list-group-item-primary py-1">Maks. Değer</li>
-							<li class="list-group-item py-1">{{minmaxlist.0}}</li>	
-							<li class="list-group-item list-group-item-primary py-1">Maks. Değer Zamanı</li>
-							<li class="list-group-item py-1">{{minmaxlist.1}}</li>	
-							<li class="list-group-item list-group-item-danger py-1">Min. Değer</li>
-							<li class="list-group-item py-1">{{minmaxlist.2}}</li>	
-							<li class="list-group-item list-group-item-danger py-1">Min. Değer Zamanı</li>
-							<li class="list-group-item py-1">{{minmaxlist.3}}</li>	
-							<li class="list-group-item list-group-item-success py-1">Şimdiki Değer</li>
-							<li class="list-group-item py-1">{{minmaxlist.4}}</li>	
-							<li class="list-group-item list-group-item-danger py-1">Maks.dan Düşüş %</li>
-							<li class="list-group-item py-1">{{minmaxlist.5}}</li>	
-							<li class="list-group-item list-group-item-primary py-1">Min.den Çıkış %</li>
+							<li class="list-group-item list-group-item-primary py-1">Max Val</li>
+							<li class="list-group-item py-1">{{minmaxlist.0}}</li>
+							<li class="list-group-item list-group-item-primary py-1">Max Val Date</li>
+							<li class="list-group-item py-1">{{minmaxlist.1}}</li>
+							<li class="list-group-item list-group-item-danger py-1">Min Val</li>
+							<li class="list-group-item py-1">{{minmaxlist.2}}</li>
+							<li class="list-group-item list-group-item-danger py-1">Min. Val Date</li>
+							<li class="list-group-item py-1">{{minmaxlist.3}}</li>
+							<li class="list-group-item list-group-item-success py-1">Now</li>
+							<li class="list-group-item py-1">{{minmaxlist.4}}</li>
+							<li class="list-group-item list-group-item-danger py-1">Delta from Max %</li>
+							<li class="list-group-item py-1">{{minmaxlist.5}}</li>
+							<li class="list-group-item list-group-item-primary py-1">Delta from Min %</li>
 							<li class="list-group-item py-1">{{minmaxlist.6}}</li>
-						</strong>	
+						</strong>
 						</font>
 						</ul>
 						{%endif%}
@@ -200,9 +200,9 @@
 							<table class="table table-sm"><!--table table-sm-->
 							<thead>
 							<tr>
-							<th scope="col" class="bg-success">MA7</th>
-							<th scope="col" class="bg-primary">MA25</th>
-							<th scope="col" class="bg-danger">MA99</th>
+							<th scope="col" class="bg-success">ma7</th>
+							<th scope="col" class="bg-primary">ma25</th>
+							<th scope="col" class="bg-danger">ma99</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -223,7 +223,7 @@
 	</font>
 
 		{% else %}
-		<div class = "alert alert-danger">API çalışmadı</div>
+		<div class = "alert alert-danger">API did not load</div>
 	{% endif %}
 
 {%endblock%}

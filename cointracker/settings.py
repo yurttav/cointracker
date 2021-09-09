@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'lsl+1kmz)!8j2=ww5)u7h^*rxo)m7$##gce@6)4ut!^u!20x2$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cointrade.pythonanywhere.com','https://launchpad.binance.com']
 
 
 # Application definition
@@ -125,5 +125,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-#static dizininden farklı olarak site kurulduğu zaman çalışması için static dosyaların tek bir yerde toplanması gerekiyor. 
+#static dizininden farklı olarak site kurulduğu zaman çalışması için static dosyaların tek bir yerde toplanması gerekiyor.
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")

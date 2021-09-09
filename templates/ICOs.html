@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block body%}
+
+<a style = "float : right;" href="/ICOs" class="btn btn-danger">Update</a>
+
+<p>{{all_ICO_data}}</p>
+
+<font size="-1">
+
+{% if all_ICO_data  %}
+
+        <table id="mainpagetable" class="table table-striped table-bordered" style="width:100%">
+				<thead>
+				  <tr>
+                    <th scope="col">ICO Name</th>
+                    <th scope="col">Exchange</th>
+					<th scope="col">Start Time</th>
+					<th scope="col">End Time</th>
+					<th scope="col">Total Supply</th>
+                    <th scope="col">Initial Curcilating Supply</th>
+                    <th scope="col">Session Supply</th>
+					<th scope="col">Price</th>
+				  </tr>
+				</thead>
+				<tbody>
+					{% for ICO in all_ICO_data %}
+						<tr>
+                            <th scope="row"> <a href="{{ICO.Link}}" target="_blank">{{ICO.Name}}</a></th>
+                            <td>Binance</td>
+							<td>{{ ICO.Token_Sale_Start_Time }}</td>
+							<td>{{ ICO.End_Time }}</td>
+							<td>{{ ICO.Total_Token_Supply }}</td>
+                            <td>{{ ICO.Initial_Circulating_Supply }}</td>
+                            <td>{{ ICO.Session_Supply }}</td>
+							<td>{{ ICO.Public_Sale_Token_Price }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+				</table>
+
+		{% else %}
+		<div class = "alert alert-danger">API çalışmadı</div>
+	{% endif %}
+</font>
+{%endblock%}
+

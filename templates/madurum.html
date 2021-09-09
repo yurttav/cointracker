@@ -1,0 +1,138 @@
+{% extends "layout.html" %}
+
+{% block body%}
+<div class="row justify-content-between">
+				<div class="col-3">
+						<form>
+								{% csrf_token %}
+						<div class="input-group">
+								<div class="input-group-prepend">
+                		<span class="input-group-text" id=""><font size="-2">Interval</font></span>
+                		<select class="custom-select" id="inputGroupSelect04" name="timeinterval">
+                				{% if interval %}
+                				<option selected>{{interval}}</option>
+                				{%else%}
+                				<option selected>1h</option>
+                				{%endif%}
+                				<option value="1m">1m</option>
+                				<option value="3m">3m</option>
+                				<option value="5m">5m</option>
+                				<option value="15m">15m</option>
+                				<option value="30m">30m</option>
+                				<option value="1h">1h</option>
+                				<option value="2h">2h</option>
+                				<option value="4h">4h</option>
+                				<option value="6h">6h</option>
+                				<option value="8h">12h</option>
+                				<option value="1d">1d</option>
+                				<option value="3d">3d</option>
+                				<option value="1w">1w</option>
+                				<option value="1M">1M</option>
+                		</select>
+        				</div>
+								<div class="input-group-append">
+										<button type="submit" class="btn btn-primary">Display ma Values</button>
+								</div>
+						</div>
+				</div>
+
+				<div class="col-8">
+						<form>
+								<div class="row">
+										<div class="col">
+												<div class="form-check">
+																<input class="form-check-input" type="checkbox" id="defaultCheck2" name="checkboxstate2" unchecked>
+																<label class="form-check-label" for="defaultCheck2">
+																		All
+																</label>
+												</div>
+										</div>
+										<div class="col">
+												<div class="form-check">
+																<input class="form-check-input" type="checkbox" id="defaultCheck1" name="checkboxstate1" unchecked>
+																<label class="form-check-label" for="defaultCheck1">
+																		ma25&lt;Price&lt;ma99
+																</label>
+												</div>
+										</div>
+										<div class="col">
+												<div class="form-check">
+																<input class="form-check-input" type="checkbox" id="defaultCheck3" name="checkboxstate3" unchecked>
+																<label class="form-check-label" for="defaultCheck3">
+																		Price>wma50 %2
+																</label>
+												</div>
+										</div>
+										<div class="col">
+												<div class="form-check">
+																<input class="form-check-input" type="checkbox" id="defaultCheck4" name="checkboxstate4" unchecked>
+																<label class="form-check-label" for="defaultCheck4">
+																		Price&lt;wma50 %2
+																</label>
+												</div>
+										</div>
+										<div class="col">
+														<button type="submit" class="btn btn-primary">Display</button>
+										</div>
+								</div>
+						</form>
+				</div>
+		</div>
+</form>
+
+<p></p>
+
+{% if binanceallcoins  %}
+
+<font size="-1">
+
+<div class="row">
+	<div class="col">
+			<table id="minmaxtable1" class="table table-striped table-sm table-bordered" style="width:200%">
+				<thead>
+				  <tr>
+					<th scope="col">Coin</th>
+					<th scope="col">Now</th>
+					<th scope="col">ma7</th>
+					<th scope="col">ma7%</th>
+					<th scope="col">ma25</th>
+					<th scope="col">ma25%</th>
+					<th scope="col">ma99</th>
+          			<th scope="col">ma99%</th>
+					<th scope="col">MA99 vs MA25 %</th>
+					<th scope="col">wma50</th>
+					<th scope="col">wma50%</th>
+					<th scope="col">RSI14</th>
+				  </tr>
+				</thead>
+				<tbody>
+					{% for coin in binanceallcoins %}
+						{% if coin.9%}
+						<tr>
+							<th scope="row"> <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{coin.0}}" target="_blank">{{coin.0}}</a></th>
+							<td>{{ coin.1 }}</td>
+							<td>{{ coin.2 }}</td>
+							<td>{{ coin.3 }}</td>
+							<td>{{ coin.4 }}</td>
+							<td>{{ coin.5 }}</td>
+							<td>{{ coin.6 }}</td>
+              				<td>{{ coin.7 }}</td>
+							<td>{{ coin.8 }}</td>
+							<td>{{ coin.10 }}</td>
+							<td>{{ coin.11 }}</td>
+							<td>{{ coin.12 }}</td>
+						</tr>
+						{%endif%}
+					{% endfor %}
+				</tbody>
+				</table>
+			</div>
+		</div>
+    </font>
+
+		{% else %}
+		<div class = "alert alert-danger">API did not load</div>
+	{% endif %}
+
+{%endblock%}
+

@@ -30,5 +30,8 @@ urlpatterns = [
     path('deleteallcoin/', views.deleteallcoin, name = "deleteallcoin"),
     path('update/<str:id>', views.update,name="update"),
     path('minmax/', views.minmax, name = "minmax"),
-
+    path('madurum/', views.madurum, name = "madurum"),
+    path('trackvolume/', views.trackvolume, name = "volumes"),
+    path('trackbuyvolume/', views.trackbuyvolume, name = "buyvolumes"),
+    path('ICOs/', views.ICOs, name = "ICOs"),
 ]
